@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<body>
+    <div class="">
+        <h1>Agregar Vehículo</h1>
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="marca" class="form-label">Marca</label>
+                <select id="marca" name="marca" required>
+                    {% for marca in marcas %}
+                        <option value="{{ marca.marca }}" {% if marca.marca == "Ford" %}selected{% endif %}>{{ marca.marca }}</option>
+                    {% endfor %}
+                </select>                
+            </div>
+            <div class="mb-3">
+                <label for="modelo" class="form-label">Modelo</label>
+                <input type="text" class="form-control" id="modelo" name="modelo" required>
+            </div>
+            <div class="mb-3">
+                <label for="serial_carroceria" class="form-label">Serial Carrocería</label>
+                <input type="text" class="form-control" id="serial_carroceria" name="serial_carroceria" required>
+            </div>
+            <div class="mb-3">
+                <label for="serial_motor" class="form-label">Serial Motor</label>
+                <input type="text" class="form-control" id="serial_motor" name="serial_motor" required>
+            </div>
+            <div class="mb-3">
+                <label for="categoria" class="form-label">Categoría</label>
+                <select id="categoria" name="categoria" required>
+                    {% for categoria in categorias %}
+                    <option value="{{ categoria.categoria }}" {% if categoria.categoria == "Particular" %}selected{% endif %}>{{ categoria.categoria }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="precio" class="form-label">Precio</label>
+                <input type="number" class="form-control" id="precio" name="precio" required min ="0" step="any" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+</body>
+
+{% endblock %}
