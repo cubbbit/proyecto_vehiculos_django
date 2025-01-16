@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-=qyvp=uli81qd_^5og!_st=^mv$*@%bv^5i*@jfe8#wrr#vy6p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -68,7 +68,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'proyecto_vehiculos_django.wsgi.application'
+WSGI_APPLICATION = 'proyecto_vehiculos_django.wsgi.app'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
@@ -85,13 +85,15 @@ if DEBUG:
     }
 else:
     DATABASES = {
-        # postgresql://neondb_owner:WQb0NfgFOGX5@ep-flat-fog-a5x581oq.us-east-2.aws.neon.tech/neondb?sslmode=require
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'neondb',
-        'USER': "neondb_owner",
-        'PASSWORD': 'WQb0NfgFOGX5',
-        'HOST': 'ep-flat-fog-a5x581oq.us-east-2.aws.neon.tech',
-        'PORT': '5432' # de uso comun
+        # postgresql://neondb_owner:4bXrqxGIYQ5C@ep-old-hat-a8xb85tt.eastus2.azure.neon.tech/pvehiculos?sslmode=require
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'pvehiculos',
+            'USER': "neondb_owner",
+            'PASSWORD': '4bXrqxGIYQ5C',
+            'HOST': 'ep-old-hat-a8xb85tt.eastus2.azure.neon.tech',
+            'PORT': '5432' # de uso comun
+        }
     }
 
 # Password validation
@@ -128,11 +130,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "static"
-]
-STATIC_ROOT = BASE_DIR/"staticfiles/static"
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'static'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
